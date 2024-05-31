@@ -636,6 +636,21 @@
     }
     return result;
   }
+                      // Add support for parsing HSL color strings
+tinycolor.fromHsl = function(h, s, l) {
+    h = Math.min(360, Math.max(0, h));
+    s = Math.min(100, Math.max(0, s));
+    l = Math.min(100, Math.max(0, l));
+
+    return new TinyColor({ h: h, s: s, l: l });
+};
+
+// Add support for parsing HSL color strings
+tinycolor.prototype.toHsl = function() {
+    var hsl = this.toHsl();
+    return { h: hsl.h, s: hsl.s, l: hsl.l };
+};
+
   function _splitcomplement(color) {
     var hsl = tinycolor(color).toHsl();
     var h = hsl.h;
